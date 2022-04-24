@@ -1,3 +1,0 @@
-[submodule "testlib"]
-path = packages/hydrojudge/vendor/testlib
-url = https://github.com/MikeMirzayanov/testlib.git
