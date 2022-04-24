@@ -27,8 +27,8 @@ services:
     container_name: oj-backend
     restart: always
     depends_on:
-      - oj-minio
-      - oj-mongo
+      - minio
+      - mongo
     volumes:
       - ./data/backend:/root/.hydro
       - ./data/templates:/usr/local/share/.config/yarn/global/node_modules/@hydrooj/ui-default/templates
@@ -46,6 +46,6 @@ services:
     restart: always
     privileged: true
     depends_on:
-      - oj-backend
+      - backend
     volumes:
       - ./data/judge:/root/.config/hydro
