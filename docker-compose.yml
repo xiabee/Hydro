@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  oj-minio:
+  minio:
     image: minio/minio
     container_name: oj-minio
     command: server /data
@@ -14,14 +14,15 @@ services:
     
   # Warning: mongodb here is not password-protected.
   # DO NOT EXPOSE THIS SERVICE TO THE PUBLIC.
-  oj-mongo:
+  mongo:
     image: mongo
     container_name: oj-mongo
     restart: always
     volumes:
       - ./data/mongo:/data/db
 
-  oj-backend:
+# main site
+  backend:
     build: ./backend
     container_name: oj-backend
     restart: always
@@ -36,9 +37,10 @@ services:
       - MINIO_ACCESS_KEY=CHANGE_THIS
       - MINIO_SECRET_KEY=CHANGE_THIS
     ports:
-      - "0.0.0.0:80:8888" # In docker mode, change THIS port instead of port in system settings!
+      - "0.0.0.0:80:8888"
 
-  oj-judge:
+# judge server
+  judge:
     build: ./judge
     container_name: oj-judge
     restart: always
