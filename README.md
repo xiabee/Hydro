@@ -20,11 +20,8 @@ docker-compose up -d
   ```dockerfile
   RUN sed -i "s/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list && \
       sed -i "s/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list && \
-      apt-get update && apt-get install -y --no-install-recommends && apt upgrade
-  
+      apt-get update && apt-get install -y --no-install-recommends && apt upgrade -y
   ```
-
-
 
 ## 测评机默认编译器
 
@@ -45,13 +42,9 @@ docker-compose up -d
 - mono-mcs
 ```
 
-
-
 ## 注意
 
 修改该账号密码后，请修改`data/judge/config/judge.yaml`中的`password`。否则可能会无法测评。
-
-
 
 ## Docker相关
 
