@@ -8,20 +8,63 @@
 
 ### 
 
-## 使用方式
+## 搭建方式
 
 ```bash
 docker-compose up -d
 # 若未产生报错则运行成功
 ```
 
-* 注意：本项目在本地编译镜像，使用清华源，若海外服务器无法访问清华源可以修改`./backend/Dockerfile`和`./judge/Dockerfile`中的`3~5`行：
+* 注意：本项目在本地编译镜像，使用清华源，若海外服务器无法访问清华源可以修改`./backend/Dockerfile`和`./judge/Dockerfile`中的`3~5`行，将其换为对应的源即可：
   
   ```dockerfile
   RUN sed -i "s/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list && \
       sed -i "s/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g" /etc/apt/sources.list && \
       apt-get update && apt-get install -y --no-install-recommends && apt upgrade -y
   ```
+
+
+
+## 配置管理员账号
+
+* 右上角注册新账号
+
+* 在刚刚运行`docker-compose`目录的目录下执行以下命令，设置超级管理员：
+  
+  ```bash
+  docker exec oj-backend -it hydrooj cli user setSuperAdmin 2
+  # 将UID为2的用户设置为管理员
+  docker exec oj-backend -it pm2 restart hydrooj
+  # 重新启动hydro
+  ```
+
+
+
+## 配置测评机
+
+* 测评机需要管理员账号
+
+* 修改宿主机中的`./data/judge/judge.yaml`，将`uname`和`password`修改为对应管理员账号的用户名和密码：
+  
+  ```yaml
+  hosts:
+    localhost:
+      type: hydro
+      server_url: http://oj-backend:8888/
+      uname: root
+      password: rootroot
+      detail: true
+  ```
+
+* 重启容器：
+  
+  ```bash
+  docker-compose restart
+  ```
+
+
+
+
 
 ## 测评机默认编译器
 
@@ -41,10 +84,6 @@ docker-compose up -d
 - mono-runtime
 - mono-mcs
 ```
-
-## 注意
-
-修改该账号密码后，请修改`data/judge/config/judge.yaml`中的`password`。否则可能会无法测评。
 
 ## Docker相关
 
