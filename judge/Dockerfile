@@ -22,7 +22,8 @@ RUN apt-get -qq update && \
     mono-mcs
 
 ADD ./entrypoint.sh /root/entrypoint.sh
-ADD ./judge.yaml /root/judge.yaml
+# ADD ./judge.yaml /root/judge.yaml
+ADD ./judge.yaml /root/.config/hydro/judge.yaml
 RUN chmod +x /root/entrypoint.sh
 
 RUN yarn global add pm2 @hydrooj/hydrojudge && \
