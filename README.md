@@ -23,8 +23,6 @@ docker-compose up -d
       apt-get update && apt-get install -y --no-install-recommends && apt upgrade -y
   ```
 
-
-
 ## 配置管理员账号
 
 * 右上角注册新账号
@@ -37,8 +35,6 @@ docker-compose up -d
   docker exec oj-backend -it pm2 restart hydrooj
   # 重新启动hydro
   ```
-
-
 
 ## 配置测评机
 
@@ -61,10 +57,6 @@ docker-compose up -d
   ```bash
   docker-compose restart
   ```
-
-
-
-
 
 ## 测评机默认编译器
 
@@ -101,3 +93,9 @@ docker-compose down
 ```
 
 * `docker`入门教程参考这里：[Docker入门 · xiabee-瞎哔哔](https://blog.xiabee.cn/posts/docker-pupy/)
+
+
+
+## 常见问题
+
+* 参考 [Docker搭建Hydro-OJ系统 · xiabee-瞎哔哔](https://blog.xiabee.cn/posts/hydro-docker/)
